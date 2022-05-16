@@ -1,45 +1,27 @@
 ﻿
 #include <iostream>
 #include <string>
+#include "user.h"
+#include "message.h"
+#include "interface.h"
 
 using std::wstring;
 using std::wcout;
 
-class user {
-    wstring Password;
-    uint32_t UserIndex;
-protected:
-    wstring Login;
-public:
-    virtual void registrate(wstring login, wstring password) {
-        Login = login;
-        Password = password;
-    }
-};
-
-class message {
-    uint32_t AuthorIndex;
-protected:
-    wstring Text;
-public:
-    virtual void write(wstring input,uint32_t author_index) {
-        Text = input;
-        AuthorIndex = author_index;
-    }
-
-    wstring text() {
-        return Text;
-    }
-
-    uint32_t author() {
-        return AuthorIndex;
-    }
-};
-
 int main()
 {
-    message msg;
-    msg.write(L"Hello!", 1231);
+    user User;
+    user User1;
+    User.registrate(L"ABCD", L"SASA");
+    User1.registrate(L"ABCD", L"SASA");
+    User.get_userindex();
+    User1.get_userindex();
 
-    wcout << msg.text()<<" by "<<msg.author();
+    message msg;
+
+    msg.write(L"Hello!", User);
+    edit(msg.edit());
+
+    wcout << '"' << msg.text() << "\" by " << msg.author_name()<< " #"<<msg.author_index() << '\n';
+    wcout << User1.name() << " #" << User1.userindex() << '\n';
 }

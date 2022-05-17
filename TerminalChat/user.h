@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "index_giver.h"
+#include "database.h"
 
 using std::wstring;
 
@@ -29,6 +30,10 @@ public:
         if (UserIndex == 0) {
             UserIndex = IndexGiver.give_userindex();
         }
+    }
+
+    void tell_secretly(database& database_t) {
+
     }
 
     uint32_t userindex() {
